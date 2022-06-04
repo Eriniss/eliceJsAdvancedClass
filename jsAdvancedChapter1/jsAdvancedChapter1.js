@@ -25,36 +25,39 @@
 
 
 // 자바스크립트 코드의 실행 2
-const a = 15;
-const b = 25;
+{
+  const a = 15;
+  const b = 25;
 
-function myFunc() { 
-  let a = 10;
-  let b = 20;
-  function add(first, second) { 
-    return first + second;
+  function myFunc() { 
+    let a = 10;
+    let b = 20;
+    function add(first, second) { 
+      return first + second;
+    }
+    return add(a, b); // 중첩함수, 콜백함수를 사용할 경우 클로저가 작동되어 스코프 체인은 한단계 상위 스코프를 가리킨다.
   }
-  return add(a, b); // 중첩함수, 콜백함수를 사용할 경우 클로저가 작동되어 스코프 체인은 한단계 상위 스코프를 가리킨다.
-}
 
-myFunc(); // 30;
+  myFunc(); // 30;
+}
 
 // 자바스크립트 코드의 실행 3
 
-let o = {
-  name: 'Daniel',
-  method: function(number) {
-    return this.name.repeat(number); // repeat 메서드는 인수의 숫자값만큼 문자열을 반복한다, 메서드 내에서 this를 사용할 시 자기 자신의 객체를 반환한다.
+{
+  let o = {
+    name: 'Daniel',
+    method: function(number) {
+      return this.name.repeat(number); // repeat 메서드는 인수의 숫자값만큼 문자열을 반복한다, 메서드 내에서 this를 사용할 시 자기 자신의 객체를 반환한다.
+    }
+  };
+
+  function myFunc() {
+    let n = 10;
+    return console.log(o.method(n)); 
   }
-};
 
-function myFunc() {
-  let n = 10;
-  return console.log(o.method(n)); 
+  myFunc() // 'Daniel'이 10번 출력된다.
 }
-
-myFunc() // 'Daniel'이 10번 출력된다.
-
 
 // 객체의 메서드의 경우, 메서드 환경의 this는 해당 객체를 가리키게 된다.
 // 하지만 this가 가리키는 것은 환경에 따라 변할 수 있다.
@@ -66,8 +69,19 @@ myFunc() // 'Daniel'이 10번 출력된다.
 // 코드에서 참조하는 변수, 객체(함수 포함), this 등에 대한 레퍼런스가 있다.
 // 실행 컨텍스트는 전역에서 시작해, 함수가 호출될 때 스택에 쌓이게 된다.
 
-
-
+{
+  let a = 10; // 1) 전역 컨텍스트에서 호출
+  function f1() { // 1) 전역 컨텍스트에서 호출
+    let b = 20;
+    function print(v) { console.log(v); } // 1) console은 전역 컨텍스트에서 실행된다. 2) print 함수는 f1 함수 컨텍스트에서 실행된다
+    function f2() { // 2) f2 함수는 f1함수 컨텍스트에서 실행된다.
+      let c = 30; // 3) 변수 c는 f2 함수 컨텍스트에서 실행된다.
+      print(a + b + c); // 3) 표현식 print는 f2 함수 컨텍스트에서 실행된다.
+    }
+    f2();
+  }
+  f1();
+}
 
 
 
