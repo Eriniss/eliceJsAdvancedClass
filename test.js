@@ -1,9 +1,6 @@
-class Person {
-  constructor(name) {
-    this.name = name;
-  }
+const x = {
+  name: "Jeong",
+  myFunc: () => `Hi! My name is ${this.name}`
 }
 
-const me = new Person('Lee');
-
-console.log(me);
+x.myFunc()
