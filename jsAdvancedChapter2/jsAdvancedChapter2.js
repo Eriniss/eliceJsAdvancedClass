@@ -110,7 +110,7 @@
   }
 
   const Krw = 1000000;
-  console.log(changeToUsd(krw)) // changeToUsd에서 변환된 krw를 소숫점 둘째자리까지만 처리하도록 한다.
+  console.log(changeToUsd(krw)); // changeToUsd에서 변환된 krw를 소숫점 둘째자리까지만 처리하도록 한다.
 }
 
 
@@ -120,7 +120,7 @@
     return Number(n).toFixed(2); // toFixed는 반올림을 한다.
   }
 
-  formatNumber('12.345') // 12.35
+  formatNumber('12.345'); // 12.35
 }
 
 
@@ -143,3 +143,101 @@
   Array.from({ length: 10}).map(() =>
   getRandomNumberInRange(50, 100));
 } // 50에서 100사이의 랜덤한 숫자르 반환하는 함수
+
+
+// * 자바스크립트 내장 객체 3
+
+// 특정 시점의 날짜를 표시하기 위한 객체
+// 날짜와 관련된 작업을 하기 위한 여러 메서드를 포함한다.
+
+{
+  function isWeekend(todya) {
+    let day = today.getDay();
+    return day === 0 || day === 6;
+  }
+
+  console.log(isWeekend(new Date("2021/9/12")));
+}
+// Date.getDay()는 요일을 O(일요일)부터 6(토요일) 로 구분한다.
+// 이 외에도 년도, 월, 일, 시 ,분, 초, 밀리초 등을 구할 수 있다.
+
+{
+  function addDays(date, days) {
+    date.setDate(date.getDate() + days);
+    return date.toDateString();
+  }
+
+  addDays(new Date("2021/9/22", 1000));
+} // Fri Dec 31 2021
+
+{
+  function timeDiff (date1, date2) {
+    returndate2.getTime() - 
+    date1.getTime();
+  }
+  
+  let dayTime= 60* 24* 60* 1000;
+
+  function fromNow(date) {
+    let diff= timeDiff(date, new Date());
+    return`${Math.floor(diff/ dayTime)} days ago...`;
+  }
+
+  fromNow(newDate("2021/9/1"));
+}
+// getTime() 메서드는 시간을 밀리초 단위로 반환한다.
+// 이때 밀리초는 1970.1.1 시접부터 흐른 시간이다.
+// fromNow는 주어진 시간이 현재로부터 며칠이나 흘렀는지를 계산한다.
+
+
+// String은 자바스크립트의 문자열 원시 타입의 래퍼 객체이다.
+// 문자열을 조작히기 위한 여러 메서드를 포함한다
+// JSON - JSON 객체와 관련된 메서드를 담은 객체이다.
+
+{
+  function toUserList(users) {
+    return users
+      .filter((user) => !user.includes("Admin"))
+      .map((user) => user.trim().toUpperCase()).map((user) => `<li>${user}</li>`)
+      .join("");
+    }
+    
+    console.log(toUserList(["Daniel", "Tom", "Johnny", "Admin"]));
+    // <li>DANIEL</li><li>TOM</li><li>JOHNNY</li>
+}
+// trim(), toUpperCase() 등은 변환된 새로운 문자열을 리턴한다.
+// includes()메서드는 문자열 검색에 성공 시 true, 실패 시 false를 리턴한다.
+// toUserList()는 이름의 배열을 받아 리스트 태그 목록의 문자열을 계산한다.
+
+{
+  "Daniel,Kim,SW".split(',');
+  // [ 'Daniel', 'Kim', 'SW' ]
+
+  "Daniel,Kim,SW".replace(',', ' ') ;
+  // "Daniel Kim SW"
+
+  "Daniel,Kim,SW".includes("Kim");
+  // true"  Daniel,Kim,SW".trim()
+  // "Daniel,Kim,SW"
+
+  "Daniel,Kim,SW".indexOf("Kim");
+  // 7
+}
+// split()은 주어진 문자열에 따라 타겟 문자열을 나눈다.
+// replace()는 주어진 문자열을 검색하여 타겟 문자열로 변환한다.
+// indexOf()는 특정 문자열을 검색하여 시작점의 인덱스를 반환한다. 없을 시 -1을 리턴한다.
+
+
+{
+  JSON.stringify({ name: "Daniel", age: 12});
+  // '{"name":"Daniel", "age":12}'
+
+  JSON.parse('{"name":"Daniel","age":12}');
+  // { name: 'Daniel', age: 12 }
+}
+// JSON.stringify()는 주어진 객체를 JSON 문자열로 만든다.
+// JSON.parse()는 주어진 JSON 문자열을 자바스크립트에 맞는 결과 객체로 만든다.
+
+
+
+
