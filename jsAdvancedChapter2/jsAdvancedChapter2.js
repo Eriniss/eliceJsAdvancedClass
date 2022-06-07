@@ -94,3 +94,52 @@
 // document는 createElement, createTextNode는 동적으로 원소를 생성한다.
 // 이를 활용해 자바스크립트만으로 원소를 구성할 수 있다.
 
+
+// * 자바스크립트 내장 객체 2
+
+// 자바스크립트의 number 원시타입을 감싸는 객체.
+// 유의미한 상수값, 숫자를 변환하는 메서드 등을 제공한다.
+// NaN(Not a Number)를 나타내는 객체.
+// isNaN() - 전역 함수로, 입력값을 숫자로 변환했을 때 NaN이 되는지를 검사.
+
+{
+  function cahngeToTus(krw) {
+    const rate = 1046;
+    return (krw / 
+    rate).toFixed(2); // Number.toFixed(x) 메서드는 숫자의 소숫접 자릿수를 제어한다. 뒤의 (x)는 옵션이며 x값만큼의 소수자리를 처리한다.
+  }
+
+  const Krw = 1000000;
+  console.log(changeToUsd(krw)) // changeToUsd에서 변환된 krw를 소숫점 둘째자리까지만 처리하도록 한다.
+}
+
+
+{
+  function formatNumber(n) {
+    if (isNaN(n)) return '0';
+    return Number(n).toFixed(2); // toFixed는 반올림을 한다.
+  }
+
+  formatNumber('12.345') // 12.35
+}
+
+
+// Math는 기본적인 수학 연산 메서드, 상수를 다루는 객체이다.
+// bigInt 타입과 호환되지 않고, Number 타입만을 인자로 다른 인자로 다룬다.
+
+{
+  function getMaxDiff(nums) {
+    return Math.max(...nums) - Math.min(...nums);
+  }
+
+  getMaxDiff([-1, -4, -7, 11]); // 18
+} // 배열의 요소중 최대값에서 최소값을 뺀 값을 반환하는 함수
+
+{
+  function getRandomNumberInRange(min, max) {
+    return Math.fllor(Math.random() * (max - min + 1)) - min;
+  }
+
+  Array.from({ length: 10}).map(() =>
+  getRandomNumberInRange(50, 100));
+} // 50에서 100사이의 랜덤한 숫자르 반환하는 함수
