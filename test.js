@@ -1,7 +1,12 @@
-{
-  function formatNumber(n) {
-    isNaN(n) ? '0' : console.log(Number(n).toFixed(2));
-  }
+const arr = [1, 2, 3, 1, 2];
 
-  formatNumber('12.345') // 12.35
+function remove(array, item) {
+  const index = array.indexOf(item);
+
+  if (item !== -1) array.splice(index, 1);
+  
+  
+  return array;
 }
+
+console.log(remove(arr, 10));
