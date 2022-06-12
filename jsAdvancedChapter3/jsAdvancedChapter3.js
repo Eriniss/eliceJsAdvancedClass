@@ -199,3 +199,54 @@
 }
 // Promise.all은 Promise의 배열을 받아 모두 성공 시 각 Promise의 resolved 값을 배열로 반환한다.
 // 하나의 Promise라도 실패할 시, 가장 먼저 실패한 Promise의 실패 이유를 반환한다.
+
+
+// * async/await
+
+
+// Promise를 활용한 비동기 코드를 간결하게 작성하는 문법
+// async/await 문법으로 비동기 코드를 동기 코드처럼 간결하게 작성할 수 있다.
+// async 함수와 await 키워드를 이용한다.
+// async로 선언된 함수는 반드시 async 함수 안에서만 사용해야 한다.
+// async로 선언된 함수는 반드시 Promise를 리턴한다.
+
+
+{
+  async function asyncFunc() {
+    let data = await fetchData()
+    let user = await fetchUser(data)
+    return user
+  }
+}
+// async 함수는 function 키워드 앞에 async를 붙여 만든다.
+// async 함수 내부에서 await 키워드를 사용한다.
+// fetchData, fetchUser는 Promise를 리턴하는 함수이다.
+
+
+{
+  function fetchData2() {
+    return requestAnimationFrame()
+      .then((response) => response.requestData)
+      .catch(error => { 
+      // 에러 발생
+    });
+  }
+}
+// Promise를 리턴하는 함수의 경우, 에러가 발생하면 catch 메서드를 이용하여 에러를 처리한다.
+// catch 메서드를 사용하지 않는다면 async 함수에서 try-catch 구문을 이용하여 에러를 처리한다.
+
+
+{
+  async function asyncFunc() {
+    try {
+      let data1 = await fetchData1();
+      return fetchData2(data1);
+    } catch (e) {
+      console.log("실패:", e);
+    }
+  }
+}
+// try-catch 구문으로 async/await 형태 비동기 코드 에러 처리가 가능하다.
+// catch 절의 e는, Promise의 catch 메서드가 받는 반환 값과 동일하다.
+
+
